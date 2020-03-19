@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="StoryBlog_X.Views.LoginFile.Register"        
+             Title="登录页面">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150" />
+                <RowDefinition Height="80" />
+                <!--账号23-->
+                <RowDefinition Height="50" />
+                <RowDefinition Height="30" />
+                <!--昵称45-->
+                <RowDefinition Height="50" />
+                <RowDefinition Height="30" />
+                <!--密码67-->
+                <RowDefinition Height="50" />
+                <RowDefinition Height="30" />
+                <!--确认密码89-->
+                <RowDefinition Height="50" />
+                <RowDefinition Height="30" />
+
+                <RowDefinition Height="50" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label x:Name="lblLogoTxt" 
+                   Grid.ColumnSpan="3" Grid.Row="1"  
+                   Text="因有事迹，才会分享！" 
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   TextColor="Cyan"
+                   FontSize="25"
+                   Margin="0,-80,0,0"></Label>
+
+            <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center"  >
+                <Label x:Name="lblAccount"                   
+                   Text="账 号："
+                   HorizontalTextAlignment="End"
+                   VerticalTextAlignment="Center"
+                   TextColor="Gray"
+                   FontSize="Medium"
+                   HorizontalOptions="Start"
+                   HeightRequest="40"
+                   WidthRequest="80"
+                   VerticalOptions="Center"></Label>
+                <Entry x:Name="etyAccount"
+                   Grid.Row="2" Grid.Column="1" 
+                   HorizontalTextAlignment="Start"
+                   TextColor="Blue"
+                   FontSize="Medium"
+                   Placeholder="填写账号！" PlaceholderColor="Olive"
+                   WidthRequest="240"
+                   HeightRequest="40"
+                   VerticalOptions="Center"></Entry>
+            </StackLayout>
+            <StackLayout  Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <Label x:Name="lblTipsAccount" FontSize="Micro" TextColor="Red" IsVisible="False"/>
+            </StackLayout>
+
+
+            <StackLayout Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center"  >
+                <Label x:Name="lblNickName"                   
+                   Text="昵 称："
+                   HorizontalTextAlignment="End"
+                   VerticalTextAlignment="Center"
+                   TextColor="Gray"
+                   FontSize="Medium"
+                   HorizontalOptions="Start"
+                   HeightRequest="40"
+                   WidthRequest="80"
+                   VerticalOptions="Center"></Label>
+                <Entry x:Name="etyNickName"
+                   Grid.Row="2" Grid.Column="1" 
+                   HorizontalTextAlignment="Start"
+                   TextColor="Blue"
+                   FontSize="Medium"
+                   Placeholder="填写昵称！" PlaceholderColor="Olive"
+                   WidthRequest="240"
+                   HeightRequest="40"
+                   VerticalOptions="Center"></Entry>
+            </StackLayout>
+            <StackLayout  Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <Label x:Name="lblTipsNickName" FontSize="Micro" TextColor="Red" IsVisible="False"/>
+            </StackLayout>
+
+
+            <StackLayout Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <Label x:Name="lblPassWord" 
+                   Text="密 码："
+                   HorizontalTextAlignment="End"
+                   VerticalTextAlignment="Center"
+                   TextColor="Gray"
+                   FontSize="Medium"
+                   HorizontalOptions="Start"
+                   HeightRequest="40"
+                   WidthRequest="80"
+                   VerticalOptions="Center"></Label>
+                <Entry x:Name="etyPassWord"
+                   Grid.Row="3" Grid.Column="1" 
+                   HorizontalTextAlignment="Start"
+                   TextColor="Blue"
+                   FontSize="Medium"
+                   Placeholder="填写密码！" PlaceholderColor="Olive"
+                   IsPassword="True"
+                   MaxLength="16"
+                   WidthRequest="240"
+                   HeightRequest="40"
+                   VerticalOptions="Center"></Entry>
+            </StackLayout>
+            <StackLayout  Grid.Row="7" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <Label x:Name="lblTipsPassWord" FontSize="Micro" TextColor="Red" IsVisible="False"/>
+            </StackLayout>
+
+
+            <StackLayout Grid.Row="8" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <Label x:Name="lblRePassWord" 
+                   Text="确认密码："
+                   HorizontalTextAlignment="End"
+                   VerticalTextAlignment="Center"
+                   TextColor="Gray"
+                   FontSize="Micro"
+                   HorizontalOptions="Start"
+                   HeightRequest="40"
+                   WidthRequest="80"
+                   VerticalOptions="Center"></Label>
+                <Entry x:Name="etyRePassWord"
+                   Grid.Row="3" Grid.Column="1" 
+                   HorizontalTextAlignment="Start"
+                   TextColor="Blue"
+                   FontSize="Medium"
+                   Placeholder="确认密码！" PlaceholderColor="Olive"
+                   IsPassword="True"
+                   MaxLength="16"
+                   WidthRequest="240"
+                   HeightRequest="40"
+                   VerticalOptions="Center"></Entry>
+            </StackLayout>
+            <StackLayout  Grid.Row="9" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <Label x:Name="lblTipsRePassWord" FontSize="Micro" TextColor="Red" IsVisible="False"/>
+            </StackLayout>
+
+            <StackLayout  Grid.Row="10" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <Button x:Name="btnRegister" 
+                        WidthRequest="90"
+                        HeightRequest="40"
+                        VerticalOptions="End"
+                        TextColor="Blue"                       
+                        Text="注  册"
+                        Clicked="BtnRegister_Clicked"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="11" Grid.ColumnSpan="3"  Padding="0,0,40,0">
+                <Label x:Name="lblForgetPassWord" Text="用户协议" TextDecorations="Underline" FontSize="Micro" 
+                       HorizontalOptions="End" TextColor="Gray"></Label>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

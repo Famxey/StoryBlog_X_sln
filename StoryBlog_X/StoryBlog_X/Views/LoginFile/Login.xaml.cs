@@ -22,24 +22,37 @@ namespace StoryBlog_X.Views.LoginFile
         public Login()
         {
             InitializeComponent();
-
             NavigationPage.SetHasNavigationBar(this, false);
-
         }
 
-        public Login(string para)
+        public Login(string option)
         {
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
 
-            judge = para;
+            judge = option;
 
         }
 
+        public Login(string option, string para)
+        {
+            InitializeComponent();
+
+            NavigationPage.SetHasNavigationBar(this, false);
+
+            if (option == "register")
+            {
+                this.etyAccount.Text = para;
+            }
+            judge = option;
+
+        }
+
+
         async private void BtnLogin_Clicked(object sender, EventArgs e)
         {
-            if (this.etyUserName.Text == "" || this.etyUserName.Text == null ||
+            if (this.etyAccount.Text == "" || this.etyAccount.Text == null ||
                 this.etyPassWord.Text == "" || this.etyPassWord.Text == null)
             {
                 this.lblTips.IsVisible = true;
@@ -48,14 +61,14 @@ namespace StoryBlog_X.Views.LoginFile
             }
 
 
-            UserInfo u = new UserInfo();
-            u.Account = this.etyUserName.Text;
-            u.PassWord = this.etyPassWord.Text;
+            UserInfo user = new UserInfo();
+            user.Account = this.etyAccount.Text;
+            user.PassWord = MD5_Helper.MD5Encrypt16(this.etyPassWord.Text);
 
             List<UserInfo> list = new List<UserInfo>();
-            list.Add(u);
+            list.Add(user);
 
-            string url = $"/{Version_Helper.versionNumber}/login/verification";
+            string url = $"/{Version_Helper.versionNumber}/user_/verification";
 
             var result = await WebApiService_Helper.PostConnectHelperAsync(url, list);
 
@@ -73,6 +86,9 @@ namespace StoryBlog_X.Views.LoginFile
                         await Navigation.PopAsync();
                         //await Navigation.PushAsync(new MainPage(judge));
                         break;
+                    case "register":
+                        await Navigation.PushAsync(new MainPage(""));
+                        break;
                     default:
                         await Navigation.PushAsync(new MainPage(""));
                         break;
@@ -81,5 +97,12 @@ namespace StoryBlog_X.Views.LoginFile
             }
 
         }
+
+        async private void BtnRegister_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LoginFile.Register());
+
+        }
+
     }
 }

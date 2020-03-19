@@ -87,15 +87,13 @@ namespace StoryBlog_X.Views.MyFiles.SettingFiles
             Models.UserInfo ui = new Models.UserInfo();
             #region
             ui.Account = OptionText_Helper.ReadAllText("Account");
-            ui.ID = int.Parse(OptionText_Helper.ReadAllText("ID"));
+            ui.Guid = OptionText_Helper.ReadAllText("Guid");
             ui.NickName = OptionText_Helper.ReadAllText("NickName");
-            ui.PassWord = OptionText_Helper.ReadAllText("PassWord");
-            ui.Picture = OptionText_Helper.ReadAllText("Picture");
             ui.Phone = OptionText_Helper.ReadAllText("Phone");
-            ui.Gender = OptionText_Helper.ReadAllText("Gender");
             ui.Describe = OptionText_Helper.ReadAllText("Describe");
             ui.Introduce = OptionText_Helper.ReadAllText("Introduce");
             string Birthday = OptionText_Helper.ReadAllText("Birthday");
+
             if (Birthday != "")
             {
                 ui.Birthday = Convert.ToDateTime(Birthday);
@@ -104,33 +102,7 @@ namespace StoryBlog_X.Views.MyFiles.SettingFiles
             {
                 ui.Birthday = DateTime.Now;
             }
-            string Age = OptionText_Helper.ReadAllText("Age");
-            if (Age != "")
-            {
-                ui.Age = int.Parse(Age);
-            }
-            else
-            {
-                ui.Age = int.Parse((DateTime.Now.Year - Convert.ToDateTime(Birthday).Year).ToString());
-            }
-            string CreateTime = OptionText_Helper.ReadAllText("CreateTime");
-            if (CreateTime != "")
-            {
-                ui.CreateTime = Convert.ToDateTime(CreateTime);
-            }
-            else
-            {
-                ui.CreateTime = DateTime.Now;
-            }
-            string LoginTime = OptionText_Helper.ReadAllText("LoginTime");
-            if (LoginTime != "")
-            {
-                ui.LoginTime = Convert.ToDateTime(LoginTime);
-            }
-            else
-            {
-                ui.LoginTime = DateTime.Now;
-            }
+
             #endregion
 
             List<Models.UserInfo> list = new List<Models.UserInfo>();
@@ -153,6 +125,7 @@ namespace StoryBlog_X.Views.MyFiles.SettingFiles
                     break;
                 case "Birthday":
                     ui.Birthday = this.DPBirthday.Date;
+                    this.edtString.Text = this.DPBirthday.Date.ToString("yyyy/MM/dd"); 
                     break;
             }
 
@@ -162,7 +135,9 @@ namespace StoryBlog_X.Views.MyFiles.SettingFiles
 
             if (result[0].Flag)
             {
-                OptionText_Helper.WriteAllText(list[0]);
+                //OptionText_Helper.WriteAllText(list[0]);
+
+                OptionText_Helper.WriteText(judge, this.edtString.Text);
 
                 await Navigation.PopAsync();
             }

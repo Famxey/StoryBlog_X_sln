@@ -27,8 +27,8 @@ namespace StoryBlog_X.HelperCls
                 {
                     case "Account":
                         return list[0].Account;
-                    case "ID":
-                        return list[0].ID.ToString();
+                    case "Guid":
+                        return list[0].Guid.ToString();
                     case "PassWord":
                         return list[0].PassWord;
                     case "NickName":
@@ -99,6 +99,22 @@ namespace StoryBlog_X.HelperCls
                         break;
                     case "BGPicture":
                         ui.BGPicture = para;
+                        break;
+                    case "NickName":
+                        ui.NickName = para;
+                        break;
+                    case "Phone":
+                        ui.Phone = para;
+                        break;
+                    case "Introduce":
+                        ui.Introduce = para;
+                        break;
+                    case "Describe":
+                        ui.Describe = para;
+                        break;
+                    case "Birthday":
+                        ui.Birthday = Convert.ToDateTime(para);
+                        ui.Age= DateTime.Now.Year - Convert.ToDateTime(para).Year;
                         break;
                 }
 

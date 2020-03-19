@@ -30,8 +30,8 @@
                    Margin="0,-80,0,0"></Label>
 
             <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center"  >
-                <Label x:Name="lblUserName"                   
-                   Text="用 户："
+                <Label x:Name="lblAccount"                   
+                   Text="账 号："
                    HorizontalTextAlignment="End"
                    VerticalTextAlignment="Center"
                    TextColor="Gray"
@@ -39,7 +39,7 @@
                    HorizontalOptions="Start"
                    HeightRequest="40"
                    VerticalOptions="Center"></Label>
-                <Entry x:Name="etyUserName"
+                <Entry x:Name="etyAccount"
                    Grid.Row="2" Grid.Column="1" 
                    HorizontalTextAlignment="Start"
                    TextColor="Blue"
@@ -74,9 +74,9 @@
             </StackLayout>
 
             <StackLayout  Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
-            <Label x:Name="lblTips" FontSize="Micro" TextColor="Red" IsVisible="False"/>
+                <Label x:Name="lblTips" FontSize="Micro" TextColor="Red" IsVisible="False"/>
             </StackLayout>
-            
+
             <StackLayout  Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
                 <Button x:Name="btnLogin" 
                         WidthRequest="90"
@@ -87,10 +87,27 @@
                         Clicked="BtnLogin_Clicked"/>
             </StackLayout>
 
-            <StackLayout Grid.ColumnSpan="3" Grid.Row="6" Padding="0,0,40,0">
+            <StackLayout Grid.Row="6" Grid.ColumnSpan="3"  Padding="0,0,40,0">
                 <Label x:Name="lblForgetPassWord" Text="忘记密码？" TextDecorations="Underline" FontSize="Micro" 
                        HorizontalOptions="End" TextColor="Gray"></Label>
             </StackLayout>
+
+            <StackLayout Grid.Row="7" Grid.ColumnSpan="3"  Padding="0,0,40,0">
+                <Button x:Name="BtnRegister" 
+                        WidthRequest="90"
+                        HeightRequest="40"
+                        VerticalOptions="End"
+                        TextColor="Blue" 
+                        Text="Gray"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"
+                        BorderWidth="1"
+                        HorizontalOptions="End"
+                        Clicked="BtnRegister_Clicked" 
+                        FontSize="Micro"/>
+            </StackLayout>
+            
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

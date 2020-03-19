@@ -44,26 +44,12 @@ namespace StoryBlog_X.Views.MyFiles.SettingFiles
             this.lblNickName.Text = NickName.Trim();
             #endregion
 
-
-            if (Gender != null)
-            {
-                this.lblGender.Text = Gender.Trim();
-            }
-            else
-            {
-                this.lblGender.Text = "未设置";
-            }
-
-
-            if (Age != "" && Age != "0")
-                this.lblAge.Text = Age.ToString();
-            else
-                this.lblAge.Text = (DateTime.Now.Year - Convert.ToDateTime(Birthday).Year).ToString();
-
-            this.lblBirthday.Text = Convert.ToDateTime(Birthday).ToString("yyyy/MM/dd");
-            this.lblPhone.Text = Phone;
-            this.lblIntroduce.Text = Introduce;
-            this.lblDescribe.Text = Describe;
+            this.lblGender.Text = (Gender != null && Gender != "") ? Gender.Trim() : "未设置";
+            this.lblAge.Text = (Age != "" && Age != "0") ? Age : "0";
+            this.lblBirthday.Text = (Birthday != null && Birthday != "") ? Convert.ToDateTime(Birthday).ToString("yyyy/MM/dd") : "未设置";
+            this.lblPhone.Text = (Phone != null && Phone != "") ? Phone : "未设置";
+            this.lblIntroduce.Text = (Introduce != null && Introduce != "") ? Introduce : "未设置";
+            this.lblDescribe.Text = (Describe != null && Describe != "") ? Describe : "未设置";
 
         }
 
@@ -119,7 +105,6 @@ namespace StoryBlog_X.Views.MyFiles.SettingFiles
             }
 
         }
-
 
         private async void VcBirthday_Tapped(object sender, EventArgs e)
         {

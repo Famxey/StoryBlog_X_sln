@@ -12,7 +12,7 @@ namespace StoryBlog_X.HelperCls
     public class WebApiService_Helper
     {
         //192.168.123.165 localhost
-        public static readonly string HttpBaseAddress = "http://localhost:88";
+        public static readonly string HttpBaseAddress = "http://localhost:888";
 
         protected string _baseUrl = "http://www.baidu.com";
 
