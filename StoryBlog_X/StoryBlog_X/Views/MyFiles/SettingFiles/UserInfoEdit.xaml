@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StoryBlog_X.Views.MyFiles.SettingFiles.UserInfoEdit"
+             Appearing="ContentPage_Appearing">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout BackgroundColor=" #2196F3">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center"   >
+                    <Button x:Name="btnBack"
+                        Text="＜"
+                        TextColor="White"
+                        BackgroundColor="#2196F3"
+                        Clicked="BtnBack_Clicked" 
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="Start"/>
+
+                    <Label x:Name="lblUIEBars"  Text="基本信息" 
+                      HorizontalTextAlignment="Center"
+                      VerticalTextAlignment="Center"
+                      StyleClass="bars" 
+                      HorizontalOptions="StartAndExpand"></Label>
+
+                    <Button x:Name="btnSave"
+                        Text="保存"
+                        TextColor="White"
+                        BackgroundColor="#2196F3"
+                        Clicked="BtnSave_Clicked" 
+                        HeightRequest="30"
+                        WidthRequest="70"
+                        HorizontalOptions="End"/>
+                </StackLayout>
+            </StackLayout>
+
+            <Editor x:Name="edtString" MaxLength="150" AutoSize="TextChanges"
+                    HorizontalOptions="Fill" 
+                    TextChanged="EdtString_TextChanged"/>
+
+            <DatePicker x:Name="DPBirthday" 
+                        MaximumDate="01/01/2100" MinimumDate="01/01/1970"
+                        Format="D"
+                        Margin="10, 0, 10, 0" 
+                        IsVisible="False"
+                        DateSelected="DPBirthday_DateSelected"
+                        HorizontalOptions="Fill"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

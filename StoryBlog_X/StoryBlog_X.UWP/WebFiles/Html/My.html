@@ -1,0 +1,173 @@
+﻿
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>个人中心</title>
+    <link rel="stylesheet" href="../AmazeUI-1.0.1/assets/css/amazeui.min.css" />
+    <link href="../StyleSheet.css" rel="stylesheet" />
+    <script src="../Public.js"></script>
+
+</head>
+<body style="background:#ececec">
+    <div class="pet_mian">
+
+        <div class="pet_head">
+            <header data-am-widget="header"
+                    class="am-header am-header-default pet_head_block">
+                <div class="am-header-left am-header-nav ">
+                    <a href="BtnBGP.html" class="iconfont pet_head_gd_ico">
+                        <img src="../Images/My/btnBGP.png" />
+                    </a>
+                </div>
+                <div class="pet_news_list_tag_name">我的</div>
+                <div class="am-header-right am-header-nav">
+                    <a href="Settings.html" class="iconfont pet_head_gd_ico">
+                        <img src="../Images/My/setting.png" />
+                    </a>
+                </div>
+            </header>
+        </div>
+
+        <div class="pet_content_list">
+            <div class="pet_grzx">
+
+                <img src="" class="imgbg" id="ImgBGPicture" />
+
+                <div class="pet_grzx_nr">
+                    <div class="pet_grzx_ico">
+                        <a href="UserPic.html"><img src="" id="ImgPicture" /></a>
+                    </div>
+                    <div class="pet_grzx_name" id="NickName"></div>
+                    <div class="pet_grzx_num_font" id="Introduce">
+                        我坐在水屋下边的平台看着大海，吹着海风，真的是太喜欢了。夜晚有好多小白鲨鱼，好多种鱼。
+                    </div>
+                    <div class="pet_grzx_num">
+                        <a href="Blogs.html">
+                            <span>
+                                <img src="../Images/My/BlogsBtn.png" /> <i id="BlogsBtnNum">653</i>
+                            </span>
+                        </a>
+                        <a href="Pictures.html">
+                            <span>
+                                <img src="../Images/My/PicturesBtn.png" /> <i id="PicturesBtnNum">653</i>
+                            </span>
+                        </a>
+                        <a href="Videos.html">
+                            <span>
+                                <img src="../Images/My/VideosBtn.png" /> <i id="VideosBtnNum">653</i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="pet_grzx_num">
+                        <a href="Talks.html">
+                            <span>
+                                <img src="../Images/My/TalksBtn.png" /> <i id="TalksBtnNum">653</i>
+                            </span>
+                        </a>
+                        <a href="Enshrines.html">
+                            <span>
+                                <img src="../Images/My/EnshrinesBtn.png" /> <i id="AttentionsBtnNum">653</i>
+                            </span>
+                        </a>
+                        <a href="Attentions.html">
+                            <span>
+                                <img src="../Images/My/AttentionsBtn.png" /> <i id="EnshrinesBtnNum">653</i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pet_article_footer_info"></div>
+        </div>
+    </div>
+    <script src="../AmazeUI-1.0.1/assets/js/zepto.min.js?ver=1.1.3"></script>
+    <script src="../AmazeUI-1.0.1/assets/js/amazeui.min.js"></script>
+    <script>
+
+        var baseUri = uri + version;
+
+        var Account = GetQueryString("Account");
+        //var Account = "famxey11";
+
+        $(function () {
+
+            LoadingPageInfo();
+
+            LoadingBtnNum();
+        });
+
+        function LoadingPageInfo() {
+
+            var GetJsonUri = baseUri + "/my/info?Account=" + Account;
+            $.ajax({
+                type: "GET",
+                url: GetJsonUri,
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    if (data.length > 0) {
+
+                        $("#NickName").html(data[0].NickName);
+                        $("#Introduce").html(data[0].Introduce);
+                        $("#ImgPicture").attr("src", uri + data[0].Picture);
+                        $("#ImgBGPicture").attr("src", uri + data[0].BGPicture);
+
+                    }
+
+
+                }
+            });
+
+
+        }
+
+        function LoadingBtnNum() {
+
+            var GetJsonUri = baseUri + "/my/btnnum?Account=" + Account;
+            $.ajax({
+                type: "GET",
+                url: GetJsonUri,
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    if (data.length > 0) {
+
+                        $("#BlogsBtnNum").html(data[0].BlogsBtnNum);
+                        $("#PicturesBtnNum").html(data[0].PicturesBtnNum);
+                        $("#VideosBtnNum").html(data[0].VideosBtnNum);
+                        $("#TalksBtnNum").html(data[0].TalksBtnNum);
+                        $("#AttentionsBtnNum").html(data[0].AttentionsBtnNum);
+                        $("#EnshrinesBtnNum").html(data[0].EnshrinesBtnNum);
+
+                    }
+
+
+                }
+            });
+
+
+        }
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2])
+            }
+            return null
+        }
+
+    </script>
+
+</body>
+</html>

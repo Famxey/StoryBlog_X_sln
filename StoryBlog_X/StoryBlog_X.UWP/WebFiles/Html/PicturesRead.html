@@ -1,0 +1,436 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>查看相册</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link rel="stylesheet" href="../AmazeUI-1.0.1/assets/css/amazeui.min.css" />
+
+    <script src="../Public.js"></script>
+
+    <style type="text/css">
+
+        .pet_mian {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hdbars {
+            background-color: #2196F3;
+        }
+
+        .imgBtn {
+            height: 25px;
+            width: 25px;
+            margin: 5px;
+        }
+
+        .btnNvas {
+            text-align: center;
+        }
+
+        .divNva {
+            width: 100%;
+            background-color: rgba(128, 128, 128,.6);
+        }
+
+        .clsNum {
+            text-align: right;
+            padding-right: 7px;
+        }
+
+        .picClsTitle {
+            color: dodgerblue;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .picClsDescribe {
+            color: gray;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .picClsPicCnt {
+            color: gray;
+            opacity: 0.8;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .picAddColor {
+            color: white;
+        }
+
+        .gal {
+            position: relative;
+        }
+
+        .Del {
+            height: 25px;
+            width: 25px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .Edit {
+            height: 25px;
+            width: 25px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border: 1px solid blue;
+        }
+
+        .None {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pet_mian">
+        <!-- Bars -->
+        <header class="am-topbar am-topbar-fixed-top">
+            <div class="am-container am-cf hdbars">
+                <div class="am-topbar-brand am-fl">
+                    <a href="#" id="btnBack">
+                        <img src="../Images/back.png" class="imgBtn" />
+                    </a>
+                </div>
+
+                <div class="am-topbar-brand am-fr">
+                    <a id="btnDel"><img src="../Images/delete.png" class="imgBtn" /></a>
+                    <a id="btnEdit"><img src="../Images/edit.png" class="imgBtn" /></a>
+                    <a id="btnAdd" class="btnNvas"><img src="../Images/upload.png" class="imgBtn" /></a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Gallery -->
+        <script type="text/x-handlebars-template" id="amz-tpl">
+
+            {{>gallery gallery}}
+
+        </script>
+
+        <!-- List -->
+        <div data-am-widget="list_news" class="am-list-news am-list-news-default">
+            <!--更多在底部-->
+            <div class="am-list-news-ft">
+                <a class="am-list-news-more am-btn am-btn-sm am-btn-default" href="###">查看更多 &raquo;</a>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer data-am-widget="footer" class="am-footer am-footer-default">
+            <div class="am-footer-switch">
+            </div>
+        </footer>
+
+        <!-- prompt -->
+        <div class="am-modal am-modal-prompt" tabindex="-1" id="Edit-prompt">
+            <div class="am-modal-dialog">
+                <div class="am-modal-bd">
+                    来来来，为这张相片吐槽点啥吧
+                    <input type="text" class="am-modal-prompt-input">
+                </div>
+                <div class="am-modal-footer">
+                    <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                    <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="../AmazeUI-1.0.1/assets/js/zepto.min.js?ver=1.1.3"></script>
+    <script src="../AmazeUI-1.0.1/assets/js/amazeui.min.js"></script>
+    <script src="../AmazeUI-1.0.1/assets/js/handlebars.min.js"></script>
+    <script src="../AmazeUI-1.0.1/assets/js/amazeui.widgets.helper.js"></script>
+
+    <script type="text/javascript">
+
+        var baseUri = uri + version;
+
+        var uAccount = GetQueryString("Account");
+        var picClsID = GetQueryString("picClsID");
+
+        //var uAccount = "famxey11";
+        //var picClsID = "1043";
+
+        var list, json, eID;
+
+        $(function () {
+
+            Back();
+
+            pictureGalleryLoading();
+
+            pictureAdd();
+
+            var s = setTimeout(function () {
+
+                $(".Del").each(function () {
+
+                    $(this).click(function () {
+
+                        var ID = $(this).prev().find("div").html();
+
+                        pictureDel(ID);
+
+                    });
+
+                });
+
+                $(".Edit").each(function () {
+
+                    $(this).click(function () {
+
+                        eID = null;//必须清空，不然成数组了
+                        eID = $(this).prev().prev().find("div").html();
+
+                        $('#Edit-prompt').modal({
+                            relatedElement: this,
+                            onConfirm: function (data) {
+
+                                var picDescribe = data;
+
+                                console.log(picDescribe);
+                                console.log(eID);
+
+                                if (picDescribe == "") {
+                                    return;
+                                }
+
+                                pictureEdit(eID, picDescribe);
+                            }
+                        });
+
+                    });
+
+                });
+
+                ClickDisplayDel();
+
+                ClickDisplayEdit();
+
+                clearTimeout(s);
+
+            }, 1000);
+
+        });
+
+        function Back() {
+            $("#btnBack").click(function () {
+                self.location.href = "Pictures.html?Account=" + uAccount;
+            });
+        }
+
+        function ClickDisplayEdit() {
+
+            $("#btnEdit").click(
+                function () {
+                    var str = $(this).find("img").attr("class");
+                    console.log(str);
+                    if (str == "imgBtn") {
+                        $(this).find("img").removeClass("imgBtn");
+                        $(".Edit").each(function () {
+                            $(this).removeClass("None");
+                        });
+                    }
+                    else {
+                        $(this).find("img").addClass("imgBtn");
+                        $(".Edit").each(function () {
+                            $(this).addClass("None");
+                        });
+                    }
+                }
+            );
+        }
+
+        function ClickDisplayDel() {
+
+            $("#btnDel").click(
+                function () {
+                    var str = $(this).find("img").attr("class");
+                    console.log(str);
+                    if (str == "imgBtn") {
+                        $(this).find("img").removeClass("imgBtn");
+                        $(".Del").each(function () {
+                            $(this).removeClass("None");
+                        });
+                    }
+                    else {
+                        $(this).find("img").addClass("imgBtn");
+                        $(".Del").each(function () {
+                            $(this).addClass("None");
+                        });
+                    }
+                }
+            );
+        }
+
+        function pictureEdit(ID, picDescribe) {
+
+            var GetJsonUri = baseUri + "/picture_/update?uAccount=" + uAccount + "&picDescribe=" + picDescribe + "&ID=" + ID;
+
+            $.ajax({
+                type: "POST",
+                url: GetJsonUri,
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    if (data[0].Flag) {
+
+                        window.location.reload();
+
+                    }
+
+                }
+            });
+
+        }
+
+        function pictureDel(ID) {
+
+            console.log(ID);
+
+            var GetJsonUri = baseUri + "/picture_/delete?uAccount=" + uAccount + "&ID=" + ID;
+
+            $.ajax({
+                type: "POST",
+                url: GetJsonUri,
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    if (data[0].Flag) {
+
+                        window.location.reload();
+
+                    }
+
+                }
+            });
+
+        }
+
+        function pictureAdd() {
+
+            $("#btnAdd").click(function () {
+                self.location.href = "../Html/PicturesUpload.html?uAccount=" + uAccount + "&picClsID=" + picClsID;
+            });
+
+        };
+
+        function pictureGalleryLoading() {
+
+            var GetJsonUri = baseUri + "/picture_/get?uAccount=" + uAccount + "&picClsID=" + picClsID;
+
+            $.ajax({
+                type: "GET",
+                url: GetJsonUri,
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    list = data;
+
+                    var jsonStr = '';
+                    for (var i = 0; i < data.length; i++) {
+
+                        if (i + 1 == data.length) {
+                            jsonStr += '{"img": "' + uri + data[i].ImgFile + '",' +
+                                '"link": "' + uri + data[i].ImgFile + '",' +
+                                '"title": "' + data[i].picDescribe + '",' +
+                                '"desc": "' + data[i].ID + '"}';
+                        }
+                        else {
+                            jsonStr += '{"img": "' + uri + data[i].ImgFile + '",' +
+                                '"link": "' + uri + data[i].ImgFile + '",' +
+                                '"title": "' + data[i].picDescribe + '",' +
+                                '"desc": "' + data[i].ID + '"},';
+                        }
+
+                    }
+
+                    json = JSON.parse('[' + jsonStr + ']');
+
+                    console.log(json);
+
+                    LoadingGalleryData(json);
+                }
+            });
+        }
+
+        function LoadingGalleryData(json) {
+
+            var $tpl = $('#amz-tpl'),
+                source = $tpl.text(),
+                template = Handlebars.compile(source),
+                data = {
+                    gallery: {
+                        "options": {
+                            "cols": 2,
+                            "gallery": true
+                        },
+                        "content": json
+                    },
+                },
+                html = template(data);
+
+            $tpl.before(html);
+
+            seajs.use(['gallery'], function (s, m, g, f, n) {
+                var args = Array.prototype.slice.apply(arguments);
+                $.each(args, function (i, m) {
+                    m.init && m.init();
+                })
+            });
+
+            LoadingGalleryCss();
+        }
+
+        function LoadingGalleryCss() {
+
+            $(".am-gallery-item").each(function () {
+
+                $(this).find("div").addClass("None");
+                var imgDel = '<img src="../Images/delete2.png" class="Del None" />';
+                var imgEdit = '<img src="../Images/edit.png" class="Edit None" />';
+                $(this).parent().addClass("gal");
+                $(this).parent().append(imgDel);
+                $(this).parent().append(imgEdit);
+
+            });
+
+        }
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2])
+            }
+            return null
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StoryBlog_X.Views.MyFiles.BlogsFiles.EditBlogs"
+         Title="修改日志" Appearing="ContentPage_Appearing">
+    <ContentPage.Content>
+
+        <AbsoluteLayout>
+
+            <StackLayout BackgroundColor=" #2196F3" Orientation="Horizontal" 
+                         AbsoluteLayout.LayoutBounds="0,0,1,40" 
+                         AbsoluteLayout.LayoutFlags="WidthProportional">
+
+                <Button x:Name="btnBack"
+                        Text="＜"
+                        TextColor="White"
+                        BackgroundColor="#2196F3"
+                        Clicked="BtnBack_Clicked" 
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="Start"/>
+
+                <Label x:Name="artBar"  Text="日志修改" 
+                      HorizontalTextAlignment="Center"
+                      VerticalTextAlignment="Center"
+                      StyleClass="bars"
+                      HorizontalOptions="CenterAndExpand"></Label>
+
+            </StackLayout>
+
+            <StackLayout  x:Name="skltLoading" IsVisible="False" 
+                          AbsoluteLayout.LayoutBounds="0,40,1,5" 
+                          AbsoluteLayout.LayoutFlags="WidthProportional"                          
+                          Padding="0,0,0,0" Margin="0,-8,0,0">
+
+                <ProgressBar x:Name="actLoading" Margin="0,0,0,0"
+                             ProgressColor="Green" 
+                             HeightRequest="5"
+                             HorizontalOptions="Fill"
+                             Progress=".4"/>
+            </StackLayout>
+
+            <WebView x:Name="artWebView_Edit"  Margin="15,0,15,0" 
+                     Navigated="artWebView_Edit_Navigated"
+                     Navigating="artWebView_Edit_Navigating"
+                     AbsoluteLayout.LayoutBounds="0,40,1,1" 
+                     AbsoluteLayout.LayoutFlags="SizeProportional"/>
+
+        </AbsoluteLayout>
+
+    </ContentPage.Content>
+</ContentPage>

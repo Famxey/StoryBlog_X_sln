@@ -1,0 +1,460 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link rel="stylesheet" href="../AmazeUI-1.0.1/assets/css/amazeui.min.css" />
+    <script src="../Public.js"></script>
+    <style>
+        @media only screen and (min-width: 1200px) {
+            .blog-g-fixed {
+                max-width: 1200px;
+            }
+        }
+
+        @media only screen and (min-width: 641px) {
+            .blog-sidebar {
+                font-size: 1.4rem;
+            }
+        }
+
+        .blog-main {
+            padding: 20px 0;
+        }
+
+        .blog-title {
+            margin: 10px 0 20px 0;
+        }
+
+        .blog-meta {
+            font-size: 14px;
+            margin: 10px 0 20px 0;
+            color: #222;
+        }
+
+            .blog-meta a {
+                color: #27ae60;
+            }
+
+        .blog-pagination a {
+            font-size: 1.4rem;
+        }
+
+        .blog-team li {
+            padding: 4px;
+        }
+
+        .blog-team img {
+            margin-bottom: 0;
+        }
+
+        .blog-footer {
+            padding: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="am-g am-g-fixed blog-g-fixed">
+        <div class="col-md-8">
+            <article class="blog-main">
+                <h3 class="am-article-title blog-title">
+                    <a href="#" id="Title"></a>
+                </h3>
+                <h4 class="am-article-meta blog-meta">
+                    <a href="#" id="NickName"></a>丨
+                    <a href="#" id="artCreateTimeA"></a>丨
+                    <a href="#" id="artHot"></a>浏览丨
+                    <a href="#" id="artComCnt"></a>评论
+                </h4>
+                <div class="am-g blog-content" id="artContent">
+
+                </div>
+            </article>
+
+            <hr class="am-article-divider blog-hr">
+
+
+            <ul class="am-pagination blog-pagination">
+                <li class="am-pagination-prev"><a href="#" id="pageUp">&laquo; 上一篇</a></li>
+                <li class="am-pagination-next"><a href="#" id="pageDown">下一篇 &raquo;</a></li>
+            </ul>
+
+            <div id="comment">
+                <hr class="am-article-divider blog-hr">
+
+
+
+                <div class="am-cf">
+                    <h5 class="am-fl">
+                        <a href="#">评论区</a>
+                    </h5>
+                    <button class="am-btn-success am-fr am-btn-xs" id="WriteComment">写评论</button>
+
+                </div>
+                <ul class="am-comments-list" id="commentContent">
+                    <!--<li class="am-comment">
+                        <a href="#link-to-user-home">
+                            <img src="http://www.gravatar.com/avatar/1ecedeede84a44f371b9d8d656bb4265?d=mm&amp;s=96" alt="" class="am-comment-avatar" width="48" height="48">
+                        </a>
+                        <div class="am-comment-main">
+                            <header class="am-comment-hd">
+                                <div class="am-comment-meta">
+                                    <a href="#link-to-user" class="am-comment-author">路人甲</a> 评论于 <time>2014-7-13 0:03</time>
+                                </div>
+                            </header>
+                            <div class="am-comment-bd">
+                                <p>感觉仿佛是自身的遭遇一样，催人泪下</p>
+                            </div>
+                        </div>
+                    </li>-->
+                </ul>
+
+                <div class="am-cf">
+
+                    <a style="text-align:center" class="am-center" id="ReloadingCM">点击加载更多...</a>
+
+                </div>
+            </div>
+
+            <hr class="am-article-divider blog-hr">
+        </div>
+
+        <div class="col-md-4 blog-sidebar">
+            <div class="am-panel-group">
+
+                <section class="am-panel am-panel-default">
+                    <div class="am-panel-hd">其他日志</div>
+                    <ul class="am-list blog-list" id="artList">
+                        <!--<li><a href="#">[極短篇] Android v.s iOS，誰的字體好讀？</a></li>-->
+                    </ul>
+                </section>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- 弹窗添加名称内容 -->
+    <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd" id="PromptTitle">发表您的评论吧！</div>
+            <div class="am-modal-bd">
+
+                <input id="aNametxt" type="text" class="am-modal-prompt-input">
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../AmazeUI-1.0.1/assets/js/zepto.min.js"></script>
+    <script src="../AmazeUI-1.0.1/assets/js/amazeui.min.js"></script>
+
+    <footer class="my-footer">
+        <p><br><small></small></p>
+    </footer>
+
+
+    <script type="text/javascript">
+
+        var baseUri = uri + version;
+        var listCM, Times = 1, artNo, uAccount;
+
+        var artNo_Account = GetQueryString("artNo_Account");
+
+        if (artNo_Account != null) {
+            var arrStr = artNo_Account.split("+");
+            artNo = arrStr[0];
+            uAccount = arrStr[1];
+
+            localStorage.setItem('uAccount', uAccount);
+
+        }
+        else {
+            artNo = GetQueryString("artNo");;
+            uAccount = "";
+        }
+        console.log(artNo_Account);
+        console.log(artNo);
+        console.log(uAccount);
+        console.log(localStorage.getItem('uAccount'));
+
+        $(function () {
+
+            artContentLoading(artNo);
+            artListLoading(artNo);
+            artPageLoading(artNo);
+            artCommentLoading(artNo);
+
+            artCommentClickReLoading();
+            artCommentClickAdd();
+
+
+        });
+
+        function artContentLoading(artNo) {
+
+            var GetJsonUri = baseUri + "/article_/info?artNo=" + artNo;
+            $.ajax({
+                type: "GET",
+                url: GetJsonUri,
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+                    $("#Title").html(data[0].Title);
+                    $("#NickName").html(data[0].NickName);
+                    $("#artCreateTimeA").html(data[0].artCreateTimeA);
+                    $("#artHot").html(data[0].artHot);
+                    $("#artComCnt").html(data[0].artComCnt);
+                    $("#artContent").html(data[0].artContent);
+
+                }
+            });
+
+        }
+
+        function artListLoading(artNo) {
+
+            var GetJsonUri = baseUri + "/article_/list_user?artNo=" + artNo;
+            $.ajax({
+                type: "GET",
+                url: GetJsonUri,
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    var htmlContent = "";
+
+                    for (var i = 0; i < data.length; i++) {
+                        htmlContent += "<li><a href='../Html/BlogsRead.html?artNo=" + data[i].artNo + "'>" + data[i].Title + "</a></li>";
+                        console.log(htmlContent);
+                    }
+
+                    $("#artList").html(htmlContent);
+
+
+                }
+            });
+
+        }
+
+        function artPageLoading(artNo) {
+
+            var GetJsonUri = baseUri + "/article_/page_user?artNo=" + artNo;
+            $.ajax({
+                type: "GET",
+                url: GetJsonUri,
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    console.log(data.length);
+
+                    if (data.length == 2) {
+
+                        var pageUpUri = "../Html/BlogsRead.html?artNo=" + data[0].artNo;
+
+                        var pageDownUri = "../Html/BlogsRead.html?artNo=" + data[1].artNo;
+
+                        $("#pageUp").attr("href", pageUpUri);
+                        $("#pageDown").attr("href", pageDownUri);
+                    }
+                    else if (data.length == 1 && !data[0].pageUp) {
+                        $("#pageUp").parent().css("display", "none");
+                        var pageDownUri = "../Html/BlogsRead.html?artNo=" + data[0].artNo;
+                        $("#pageDown").attr("href", pageDownUri);
+                    }
+                    else if (data.length == 1 && !data[0].pageDown) {
+                        $("#pageDown").css("display", "none");
+                        var pageUpUri = "../Html/BlogsRead.html?artNo=" + data[0].artNo;
+                        $("#pageUp").attr("href", pageUpUri);
+                    }
+                }
+            });
+
+        }
+
+        function artCommentLoading(artNo) {
+
+            var GetJsonUri = baseUri + "/article_/comment?artNo=" + artNo;
+            $.ajax({
+                type: "GET",
+                url: GetJsonUri,
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    console.log(data.length);
+
+                    listCM = data;
+
+                    if (data.length != 0) {
+
+                        var commentContentHtml = '';
+
+                        if (data.length > 3) {
+                            for (var i = 0; i < 3; i++) {
+
+                                commentContentHtml += '<li class="am-comment"><a href="#link-to-user-home">' +
+                                    ' <img src="' + uri + data[i].uPicture + '" alt="" class="am-comment-avatar" width="48" height="48"> </a>' +
+                                    ' <div class="am-comment-main"><header class="am-comment-hd"><div class="am-comment-meta">' +
+                                    '<a href="#link-to-user" class="am-comment-author">' + data[i].NickName + '</a> 评论于 <time>' + data[i].artCreateTimeA + '</time>' +
+                                    '</div></header><div class="am-comment-bd"><p>' + data[i].artCmContent + '</p></div></div> </li>';
+
+                            }
+                        }
+                        else {
+                            for (var i = 0; i < data.length; i++) {
+
+                                commentContentHtml += '<li class="am-comment"><a href="#link-to-user-home">' +
+                                    ' <img src="' + uri + data[i].uPicture + '" alt="" class="am-comment-avatar" width="48" height="48"> </a>' +
+                                    ' <div class="am-comment-main"><header class="am-comment-hd"><div class="am-comment-meta">' +
+                                    '<a href="#link-to-user" class="am-comment-author">' + data[i].NickName + '</a> 评论于 <time>' + data[i].artCreateTimeA + '</time>' +
+                                    '</div></header><div class="am-comment-bd"><p>' + data[i].artCmContent + '</p></div></div> </li>';
+
+                            }
+                            $("#ReloadingCM").css("display", "none");
+                        }
+
+                        $("#commentContent").html(commentContentHtml);
+
+                    }
+                    else {
+                        $("#commentContent").css("display", "none");
+                        $("#ReloadingCM").css("display", "none");
+                    }
+
+                }
+            });
+
+        }
+
+        function artCommentClickReLoading() {
+
+
+            $("#ReloadingCM").click(function () {
+
+                console.log(listCM);
+                console.log(Times);
+
+                if (listCM.length != 0) {
+
+                    Times++;
+
+                    var commentContentHtml = '';
+
+                    if (listCM.length > Times * 3) {
+                        for (var i = 0; i < 3 * Times; i++) {
+
+                            commentContentHtml += '<li class="am-comment"><a href="#link-to-user-home">' +
+                                ' <img src="' + uri + listCM[i].uPicture + '" alt="" class="am-comment-avatar" width="48" height="48"> </a>' +
+                                ' <div class="am-comment-main"><header class="am-comment-hd"><div class="am-comment-meta">' +
+                                '<a href="#link-to-user" class="am-comment-author">' + listCM[i].NickName + '</a> 评论于 <time>' + listCM[i].artCreateTimeA + '</time>' +
+                                '</div></header><div class="am-comment-bd"><p>' + listCM[i].artCmContent + '</p></div></div> </li>';
+
+                        }
+                    }
+                    else {
+                        for (var i = 0; i < listCM.length; i++) {
+
+                            commentContentHtml += '<li class="am-comment"><a href="#link-to-user-home">' +
+                                ' <img src="' + uri + listCM[i].uPicture + '" alt="" class="am-comment-avatar" width="48" height="48"> </a>' +
+                                ' <div class="am-comment-main"><header class="am-comment-hd"><div class="am-comment-meta">' +
+                                '<a href="#link-to-user" class="am-comment-author">' + listCM[i].NickName + '</a> 评论于 <time>' + listCM[i].artCreateTimeA + '</time>' +
+                                '</div></header><div class="am-comment-bd"><p>' + listCM[i].artCmContent + '</p></div></div> </li>';
+
+                        }
+                        $("#ReloadingCM").css("display", "none");
+                    }
+
+
+
+                    $("#commentContent").html(commentContentHtml);
+
+                }
+
+            });
+
+        }
+
+        function artCommentClickAdd() {
+
+            $('#WriteComment').click(function () {
+
+                $('#my-prompt').modal({
+                    relatedElement: this,
+                    onConfirm: function (data) {
+
+                        console.log(data);
+
+                        if (data == "") {
+
+                            $('#PromptTitle').css("color", "red").html("评论内容不能为空哦！");
+
+                            return;
+                        }
+                        if (data.length > 50) {
+
+                            $('#PromptTitle').css("color", "red").html("评论内容超过50个字数哦！");
+
+                            return;
+                        }
+
+
+                        if (localStorage.getItem('uAccount') != "") {
+                            uAccount = localStorage.getItem('uAccount');
+                        }
+
+                        var GetJsonUri = baseUri + "/article_/comment_add?artNo=" + artNo + "&uAccount=" + uAccount + "&artCmContent=" + data;
+
+                        $.ajax({
+                            type: "GET",
+                            url: GetJsonUri,
+                            dataType: "json",
+                            success: function (data) {
+
+                                console.log(data);
+                                if (data[0].Flag) {
+
+                                    window.location.reload();
+                                }
+
+                            }
+                        });
+
+                    }
+                });
+            });
+
+        }
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2])
+            }
+            return null
+        }
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StoryBlog_X.Views.IndexFile.I_Article"
+             Title="文章热度" Appearing="LoadingEvent">
+    <ContentPage.Content>
+
+            <StackLayout >
+
+            <StackLayout BackgroundColor=" #2196F3">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center"   >
+               <Label x:Name="artBar"  Text="热门文章" 
+                      HorizontalTextAlignment="Center"
+                      VerticalTextAlignment="Center"
+                      StyleClass="bars"></Label>
+                <Button x:Name="btnShrink"
+                        Text="▲"
+                        TextColor="White"
+                        BackgroundColor="#2196F3"
+                        Clicked="BtnShrink_Clicked" 
+                        IsVisible="False"
+                        HeightRequest="40"/>
+            </StackLayout>
+            </StackLayout>
+                
+            <StackLayout  x:Name="skltLoading" IsVisible="False" 
+                          Padding="0,0,0,0" Margin="0,-8,0,0">
+                <!--<ActivityIndicator x:Name="actLoading" Color="#2196F3"  
+                           IsRunning="False" IsEnabled="True"  />-->
+
+                <ProgressBar x:Name="actLoading" Margin="0,0,0,0"
+                             ProgressColor="Green" 
+                             HeightRequest="5"
+                             HorizontalOptions="Fill"
+                             Progress=".4"/>
+            </StackLayout>
+                
+            <ListView x:Name="art_listView" RowHeight="100" 
+                      IsPullToRefreshEnabled="True" Refreshing="Art_listView_Refreshing"
+                      ItemTapped="Art_listView_ItemTapped" 
+                      ItemAppearing="Art_listView_ItemAppearing">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label  
+                           Grid.RowSpan="2"
+                           TextColor="Red"
+                           VerticalTextAlignment="Start"
+                           HorizontalTextAlignment="Center"
+                           FontSize="Large"
+                           FontAttributes="Bold"
+                           MaxLines="1"
+                           WidthRequest="40">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding TopNumber} " />
+                                            <Span Text="♨" FontSize="10" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label Grid.Row="0" 
+                           Grid.Column="1"
+                           Text="{Binding Title}"
+                           FontAttributes="Bold"
+                           MaxLines="1"
+                           VerticalOptions="End"/>
+
+                                <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Text="{Binding artDigest}"
+                           VerticalOptions="Start"
+                           MaxLines="3"/>
+                                
+                           
+                            </Grid>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout x:Name="skltLoadMore" StyleClass="tips_bars" IsVisible="True" HorizontalOptions="Center">
+
+                <StackLayout Orientation="Horizontal">
+
+                    <Button x:Name="btnReturnBottom"
+                        Text="▼"
+                        HorizontalOptions="Center"
+                        BackgroundColor="White"
+                        TextColor="#2196F3"
+                        Clicked="BtnReturnBottom_Clicked" />
+
+                    <Label Text="丨" TextColor="#2196F3" 
+                           VerticalTextAlignment="Center"></Label>
+                    <Button x:Name="btnLoadMore" Text="点击加载更多..."
+                       HorizontalOptions="Center"
+                       Clicked="BtnLoadMore_Clicked"
+                       TextColor="Gray"
+                       BackgroundColor="White"/>
+                    <Label Text="丨" TextColor="#2196F3" 
+                           VerticalTextAlignment="Center"></Label>
+                    
+                    <Button x:Name="btnReturnTop"
+                        Text="▲"
+                        HorizontalOptions="Center"
+                        BackgroundColor="White"
+                        TextColor="#2196F3"
+                        Clicked="BtnReturnTop_Clicked" />
+                </StackLayout>
+            </StackLayout>
+                                  
+        </StackLayout>
+         
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,605 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>相册</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link rel="stylesheet" href="../AmazeUI-1.0.1/assets/css/amazeui.min.css" />
+
+    <script src="../Public.js"></script>
+
+    <style type="text/css">
+
+        .pet_mian {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hdbars {
+            background-color: #2196F3;
+        }
+
+        .imgBtn {
+            height: 25px;
+            width: 25px;
+            margin: 5px;
+        }
+
+        .btnNvas {
+            text-align: center;
+        }
+
+        .divNva {
+            width: 100%;
+            background-color: rgba(128, 128, 128,.6);
+        }
+
+        .clsNum {
+            text-align: right;
+            padding-right: 7px;
+        }
+
+        .picClsTitle {
+            color: dodgerblue;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .picClsDescribe {
+            color: gray;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .picClsPicCnt {
+            color: gray;
+            opacity: 0.8;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .picAddColor {
+            color: white;
+        }
+
+        .gallery-Li {
+            position: relative;
+        }
+
+        .picClsDel {
+            height: 25px;
+            width: 25px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .picClsEdit {
+            height: 25px;
+            width: 25px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border: 1px solid blue;
+        }
+
+        .None {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pet_mian">
+        <!-- Bars -->
+        <header class="am-topbar am-topbar-fixed-top">
+            <div class="am-container am-cf hdbars">
+                <div class="am-topbar-brand am-fl">
+                    <a href="Back.html">
+                        <img src="../Images/back.png" class="imgBtn" />
+                    </a>
+                </div>
+                <div class="am-topbar-brand am-fr">
+                    <a id="btnDel"><img src="../Images/delete.png" class="imgBtn" /></a>
+                    <a id="btnEdit"><img src="../Images/edit.png" class="imgBtn" /></a>
+                    <a href="#addPicCls" data-am-offcanvas class="btnNvas"><img src="../Images/add.png" class="imgBtn" /></a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Slider -->
+        <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}'>
+            <ul class="am-slides">
+
+                <li><img id="slider0" src=""></li>
+                <li><img id="slider1" src=""></li>
+                <li><img id="slider2" src=""></li>
+                <li><img id="slider3" src=""></li>
+
+            </ul>
+        </div>
+
+        <hr />
+        <!-- Gallery -->
+        <ul id="gallery" data-am-widget="gallery" class="am-gallery sm-block-grid-2 md-block-grid-3 lg-block-grid-4  am-gallery-overlay"
+            data-am-gallery="{ pureview: false }"></ul>
+
+        <!-- List -->
+        <div data-am-widget="list_news" class="am-list-news am-list-news-default">
+            <!--更多在底部-->
+            <div class="am-list-news-ft">
+                <a class="am-list-news-more am-btn am-btn-sm am-btn-default" href="###">查看更多 &raquo;</a>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer data-am-widget="footer" class="am-footer am-footer-default">
+            <div class="am-footer-switch">
+            </div>
+        </footer>
+
+        <!-- 侧边栏内容 -->
+        <div id="addPicCls" class="am-offcanvas">
+            <div class="am-offcanvas-bar divNva">
+                <div class="am-offcanvas-content am-g">
+                    <div class="col-md-12 am-cf"><img src="../Images/delete2.png" class="am-fr" id="closeNva" /></div>
+                </div>
+                <div class="am-tab-panel ">
+                    <form class="am-form" id="picClsFrom">
+                        <div class="am-g am-margin-top">
+                            <div class="col-sm-2 am-text-right picAddColor" style="line-height:36px">
+                                名称
+                            </div>
+                            <div class="col-sm-8 col-sm-pull-1 ">
+                                <input id="picClsTitle" type="text" class="am-input-sm" placeholder="*必填，不可重复">
+                            </div>
+                        </div>
+
+                        <div class="am-g am-margin-top">
+                            <div class="col-sm-2 am-text-right picAddColor" style="line-height:36px">
+                                权限
+                            </div>
+                            <div class="col-sm-6 col-sm-pull-3 ">
+                                <select id="Authority_Sel">
+                                    <option value="1">公开</option>
+                                    <option value="0">保密</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-g am-margin-top picAddColor">
+                            <div class="col-sm-2 am-text-right" style="line-height:36px">
+                                封面
+                            </div>
+                            <div class="col-sm-6 col-sm-pull-3 ">
+                                <input id="CoverFile" type="file" onchange="onPreloadComplete(this)" />
+                            </div>
+
+                        </div>
+
+                        <div class="am-g am-margin-top">
+                            <div class="col-sm-2 am-text-right picAddColor" style="line-height:36px">
+                                描述
+                            </div>
+                            <div class="col-sm-8 col-sm-pull-1 ">
+                                <input id="picClsDescribe" type="text" class="am-input-sm" placeholder="填写内容50字符">
+                            </div>
+                        </div>
+
+                        <div class="am-g am-cf am-margin-top am-margin-bottom">
+
+                            <button id="picClsSubmit" type="button" class="am-btn am-btn-primary am-btn-xs am-center">提交保存</button>
+
+                        </div>
+
+                        <div id="preview" class="am-g am-cf">
+                            <img id="imghead" src="" class="am-center" />
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="../AmazeUI-1.0.1/assets/js/zepto.min.js?ver=1.1.3"></script>
+    <script src="../AmazeUI-1.0.1/assets/js/amazeui.min.js"></script>
+
+    <script type="text/javascript">
+
+        var baseUri = uri + version;
+
+        //var uAccount = GetQueryString("Account");
+        var uAccount = "famxey11";
+
+        var list;
+
+        $(function () {
+
+            picClsSliderLoading();
+
+            picClsGalleryLoading();
+
+            picClsOffcanvasLoading();
+
+            picClsClickDisplayDel();
+
+            picClsClickDisplayEdit();
+
+        });
+
+        function Del(id) {
+            console.log(id);
+
+            for (var i = 0; i < list.length; i++) {
+                console.log(list[i].picClsTitle);
+                if (list[i].ID == id && list[i].picClsTitle == "默认相册") {
+                    return;
+                }
+            }
+
+            var GetJsonUri = baseUri + "/picture_/cls-delete?uAccount=" + uAccount + "&ID=" + id;
+            $.ajax({
+                type: "POST",
+                url: GetJsonUri,
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    if (data[0].Flag) {
+
+                        $("#gallery").html("");
+
+                        picClsGalleryLoading();
+
+                    }
+
+                }
+            });
+
+        }
+
+        function Edit(id) {
+            var ID = id;
+
+            console.log(ID);
+
+            console.log(list);
+            $("#addPicCls").offCanvas('open');
+
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].ID == id) {
+                    $("#picClsTitle").val(list[i].picClsTitle);
+                    $("#Authority_Sel").val(list[i].picClsAuthority);
+                    $("#picClsDescribe").val(list[i].picClsDescribe);
+                    $("#imghead").attr("src", uri + list[i].CoverFile);
+                    if (list[i].picClsTitle == "默认相册") {
+                        $("#picClsTitle").attr("readonly", "readonly");
+                    }
+                    break;
+                }
+            }
+
+            $("#picClsSubmit").click(function () {
+
+                var picClsTitle = $("#picClsTitle").val();
+                var picClsAuthority = $("#Authority_Sel").val();
+                var CoverFile = $('#CoverFile')[0].files[0];
+                var picClsDescribe = $("#picClsDescribe").val();
+
+                var formData = new FormData();
+                formData.append('imgFile', CoverFile);
+
+                var GetJsonUri = baseUri + "/picture_/cls-update?uAccount=" + uAccount + "&picClsTitle=" + picClsTitle
+                    + "&picClsAuthority=" + picClsAuthority + "&picClsDescribe=" + picClsDescribe + "&ID=" + ID;
+
+                $.ajax({
+                    type: "POST",
+                    url: GetJsonUri,
+                    dataType: "multipart/form-data",
+                    cache: false, //上传文件不需要缓存
+                    data: formData,
+                    contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                    processData: false, // 告诉jQuery不要去处理发送的数据
+                    success: function (data) {
+
+                        console.log(JSON.parse(data)[0].Flag);
+
+                        if (JSON.parse(data)[0].Flag) {
+
+                            //必须初始化ID的值，不然会传多个；
+                            ID = null;
+
+                            $("#gallery").html("");
+
+                            picClsGalleryLoading();
+
+                            $("#addPicCls").offCanvas('close');
+                            $("#picClsTitle").val("");
+                            $("#Authority_Sel").val(1);
+                            $('#CoverFile').val("");
+                            $("#picClsDescribe").val("");
+                        }
+
+                    }
+                });
+
+            });
+        }
+
+        function picClsClickDisplayDel() {
+
+            $("#btnDel").click(
+                function () {
+                    var str = $(this).find("img").attr("class");
+                    console.log(str);
+                    if (str == "imgBtn") {
+                        $(this).find("img").removeClass("imgBtn");
+                        $(".picClsDel").each(function () {
+                            $(this).removeClass("None");
+                        });
+                    }
+                    else {
+                        $(this).find("img").addClass("imgBtn");
+                        $(".picClsDel").each(function () {
+                            $(this).addClass("None");
+                        });
+                    }
+                }
+            );
+        }
+
+        function picClsClickDisplayEdit() {
+
+            $("#btnEdit").click(
+                function () {
+                    var str = $(this).find("img").attr("class");
+                    console.log(str);
+                    if (str == "imgBtn") {
+                        $(this).find("img").removeClass("imgBtn");
+                        $(".picClsEdit").each(function () {
+                            $(this).removeClass("None");
+                        });
+                    }
+                    else {
+                        $(this).find("img").addClass("imgBtn");
+                        $(".picClsEdit").each(function () {
+                            $(this).addClass("None");
+                        });
+                    }
+                }
+            );
+        }
+
+        function picClsFormClickAdd() {
+
+            $("#picClsSubmit").click(function () {
+
+                var picClsTitle = $("#picClsTitle").val();
+                var picClsAuthority = $("#Authority_Sel").val();
+                var CoverFile = $('#CoverFile')[0].files[0];
+                var picClsDescribe = $("#picClsDescribe").val();
+
+                console.log(picClsTitle);
+                console.log(picClsAuthority);
+                console.log(CoverFile);
+                console.log(picClsDescribe);
+
+                if (picClsTitle == "" || picClsTitle == "picClsDescribe") {
+                    return;
+                }
+                if (CoverFile = "undefined") {
+                    return;
+                }
+
+                var formData = new FormData();
+                formData.append('imgFile', CoverFile);
+
+                var GetJsonUri = baseUri + "/picture_/cls-add?uAccount=" + uAccount + "&picClsTitle=" + picClsTitle
+                    + "&picClsAuthority=" + picClsAuthority + "&picClsDescribe=" + picClsDescribe;
+                $.ajax({
+                    type: "POST",
+                    url: GetJsonUri,
+                    dataType: "multipart/form-data",
+                    cache: false, //上传文件不需要缓存
+                    data: formData,
+                    contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                    processData: false, // 告诉jQuery不要去处理发送的数据
+                    success: function (data) {
+
+                        console.log(data);
+
+                        console.log(JSON.parse(data)[0].Flag);
+
+                        if (JSON.parse(data)[0].Flag) {
+
+                            $("#gallery").html("");
+
+                            picClsGalleryLoading();
+
+                            $("#addPicCls").offCanvas('close');
+
+                        }
+
+                    }
+                });
+
+
+            });
+
+        }
+
+        function picClsOffcanvasLoading() {
+
+            picClsFormClickAdd();
+
+            $("#closeNva").click(function () {
+
+                $("#picClsTitle").val("");
+                $("#Authority_Sel").val(1);
+                $('#CoverFile').val("");
+                $("#picClsDescribe").val("");
+                $('#imghead').attr("src", "");
+                $("#picClsTitle").removeAttr("readonly");
+                $("#addPicCls").offCanvas('close');
+            });
+        }
+
+        function picClsSliderLoading() {
+
+            var GetJsonUri = baseUri + "/picture_/cls-random?uAccount=" + uAccount;
+            $.ajax({
+                type: "GET",
+                url: GetJsonUri,
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    for (var i = 0; i < data.length; i++) {
+                        var src = uri + data[i].ImgFile;
+                        var id = "#slider" + i;
+                        $(id).attr("src", src);
+                    }
+                }
+            });
+
+        }
+
+        function picClsGalleryLoading() {
+
+            var GetJsonUri = baseUri + "/picture_/cls?uAccount=" + uAccount;
+            $.ajax({
+                type: "GET",
+                url: GetJsonUri,
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    list = data;
+
+                    var html = '';
+
+                    for (var i = 0; i < data.length; i++) {
+
+
+                        console.log(uri + data[i].CoverFile);
+
+                        html += '<li class="gallery-Li"> <a href="../Html/PicturesRead.html?picClsID=' + data[i].ID + '&Account=' + uAccount + '"> <div class="am-gallery-item"><img  src="' + uri + data[i].CoverFile + '" />' +
+                            ' <h3 class="am-gallery-title clsNum">' + data[i].picClsCreateTimeA + '&nbsp;<span class="picClsPicCnt">' + data[i].picClsPicCnt + '</span></h3></div>' +
+                            ' <div class="picClsTitle">' + data[i].picClsTitle + '</div><div class="picClsDescribe">' + data[i].picClsDescribe +
+                            '</div></a><img src = "../Images/delete2.png" class="picClsDel None" onclick="Del(' + data[i].ID + ')" /><img src = "../Images/edit.png" class="picClsEdit None" onclick="Edit(' + data[i].ID + ')" /></li>';
+                    }
+
+                    $("#gallery").html(html);
+
+                    var str = $("#btnDel").text();
+                    if (str == "完成") {
+                        $(".picClsDel").each(function () {
+                            $(this).removeClass("None");
+                        });
+                    }
+
+                    var str1 = $("#btnEdit").text();
+                    if (str1 == "完成") {
+                        $(".picClsEdit").each(function () {
+                            $(this).removeClass("None");
+                        });
+                    }
+
+                }
+            });
+
+        }
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2])
+            }
+            return null
+        }
+
+        function previewImage(file) {
+            var MAXWIDTH = 220;
+            var MAXHEIGHT = 220;
+            var div = document.getElementById('preview');
+            if (file.files && file.files[0]) {
+                div.innerHTML = '<img id=imghead>';
+                var img = document.getElementById('imghead');
+                img.onload = function () {
+                    var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                    img.width = rect.width;
+                    img.height = rect.height;
+                    //img.style.marginLeft = rect.left + 'px';
+                    img.style.marginTop = rect.top + 'px';
+                    $("#imghead").addClass("am-center");
+
+                }
+                var reader = new FileReader();
+                reader.onload = function (evt) { img.src = evt.target.result; }
+                reader.readAsDataURL(file.files[0]);
+            }
+            else {
+                var sFilter = 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+                file.select();
+                file.blur();
+                var src = document.selection.createRange().text;
+                div.innerHTML = '<img id=imghead>';
+                var img = document.getElementById('imghead');
+                img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                status = ('rect:' + rect.top + ',' + rect.left + ',' + rect.width + ',' + rect.height);
+                div.innerHTML = "<div id=divhead class='am-center' style='width:" + rect.width + "px;height:" + rect.height + "px;margin-top:" + rect.top + "px;" + sFilter + src + "\"'></div>";
+            }
+        }
+
+        function clacImgZoomParam(maxWidth, maxHeight, width, height) {
+            var param = { top: 0, left: 0, width: width, height: height };
+            if (width > maxWidth || height > maxHeight) {
+                rateWidth = width / maxWidth;
+                rateHeight = height / maxHeight;
+
+                if (rateWidth > rateHeight) {
+                    param.width = maxWidth;
+                    param.height = Math.round(height / rateWidth);
+                } else {
+                    param.width = Math.round(width / rateHeight);
+                    param.height = maxHeight;
+                }
+            }
+
+            param.left = Math.round((maxWidth - param.width) / 2);
+            param.top = Math.round((maxHeight - param.height) / 2);
+            return param;
+        }
+
+        function onPreloadComplete(file) {
+
+            var img = document.getElementById('imghead');
+
+            var reader = new FileReader();
+
+            reader.onload = function (evt) { img.src = evt.target.result; }
+
+            reader.readAsDataURL(file.files[0]);
+        }
+
+    </script>
+
+</body>
+</html>

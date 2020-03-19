@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StoryBlog_X.Views.MyFiles.Setting"
+               Title="设置" Icon="setting.png" Appearing="ContentPage_Appearing">
+    <ContentPage.Content >
+        <StackLayout>
+
+            <StackLayout BackgroundColor=" #2196F3">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center"   >
+                    <Button x:Name="btnBack"
+                        Text="＜"
+                        TextColor="White"
+                        BackgroundColor="#2196F3"
+                        Clicked="BtnBack_Clicked" 
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="Start"/>
+
+                    <Label x:Name="lblUIEBars"  Text="设置" 
+                      HorizontalTextAlignment="Center"
+                      VerticalTextAlignment="Center"
+                      StyleClass="bars" 
+                      HorizontalOptions="StartAndExpand"></Label>
+
+
+                </StackLayout>
+            </StackLayout>
+
+
+            <TableView Intent="Menu" x:Name="tbvSettings" >
+                <TableRoot>
+                    <TableSection>
+                        <ViewCell x:Name="vcUserInfo" Tapped="VcUserInfo_Tapped" >
+
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center"  Padding="10,0,10,0">
+                                <ImageButton x:Name="imgUser" Source="User.png" Aspect="AspectFill" WidthRequest="80" HeightRequest="80"  CornerRadius="40" />
+
+                                <StackLayout VerticalOptions="Center">
+                                    <Label x:Name="lblNickName" Text="昵称"
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+                                    <Label x:Name="lblAccount" Text="账号" 
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+                                </StackLayout>
+
+                                <Label Text="﹥" TextColor="#2196F3" 
+                                   FontSize="Large"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="End" 
+                                   HorizontalOptions="EndAndExpand"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+
+                    <TableSection >
+
+                        <ViewCell x:Name="vcSafety" Tapped="VcSafety_Tapped"  Height="40">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center"  Padding="10,0,10,0">
+                                <Image Source="Safety.png" WidthRequest="30" HeightRequest="30"  />
+
+                                <Label Text="账号安全"
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+
+                                <Label Text="﹥" TextColor="#2196F3" 
+                                   FontSize="Large"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="End" 
+                                   HorizontalOptions="EndAndExpand"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell x:Name="vcSwitching" Tapped="VcSwitching_Tapped" Height="40">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center"  Padding="10,0,10,0">
+                                <Image Source="Switching.png" WidthRequest="30" HeightRequest="30"  />
+
+                                <Label Text="切换账号"
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+
+                                <Label Text="﹥" TextColor="#2196F3" 
+                                   FontSize="Large"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="End" 
+                                   HorizontalOptions="EndAndExpand"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell x:Name="vcLogout" Tapped="VcLogout_Tapped" Height="40">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center"  Padding="10,0,10,0">
+                                <Image Source="Logout.png" WidthRequest="30" HeightRequest="30"  />
+
+                                <Label Text="退出"
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+
+                                <Label Text="﹥" TextColor="#2196F3" 
+                                   FontSize="Large"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="End" 
+                                   HorizontalOptions="EndAndExpand"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+
+                </TableRoot>
+            </TableView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

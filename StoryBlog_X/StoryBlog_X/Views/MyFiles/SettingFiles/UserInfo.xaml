@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StoryBlog_X.Views.MyFiles.SettingFiles.UserInfo"
+                 Appearing="ContentPage_Appearing">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <StackLayout BackgroundColor=" #2196F3">
+                <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand"   >
+                    <Button x:Name="btnBack"
+                        Text="＜"
+                        TextColor="White"
+                        BackgroundColor="#2196F3"
+                        Clicked="BtnBack_Clicked" 
+                        HeightRequest="40"
+                        WidthRequest="40"/>
+
+                    <Label x:Name="settingBar"  Text="基本信息" 
+                      HorizontalTextAlignment="Center"
+                      VerticalTextAlignment="Center"
+                      StyleClass="bars" ></Label>
+                </StackLayout>
+            </StackLayout>
+
+            <TableView Intent="Menu" x:Name="tbvSettings" >
+                <TableRoot>
+                    <TableSection>
+                        <ViewCell x:Name="vcUserImg" Tapped="VcUserImg_Tapped" Height="80" >
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,0,10,0">
+
+                                <Label Text="  头     像  ：" HorizontalOptions="StartAndExpand"
+                                       VerticalTextAlignment="Center"></Label>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                    <ImageButton x:Name="imgUser" Source="User.png" Aspect="AspectFill" WidthRequest="60" HeightRequest="60" CornerRadius="30" />
+
+                                    <Label Text="﹥" TextColor="#2196F3" 
+                                   FontSize="Large"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="End"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+
+                    <TableSection>
+
+                        <ViewCell x:Name="vcNickName" Tapped="VcNickName_Tapped" Height="40" >
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,0,10,0">
+
+                                <Label Text="  昵     称  ：" HorizontalOptions="StartAndExpand"
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                    <Label x:Name="lblNickName" Text="昵称"
+                                       HorizontalTextAlignment="End" VerticalTextAlignment="Center"></Label>
+
+                                    <Label Text="﹥" TextColor="#2196F3" 
+                                   FontSize="Large"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="End"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell x:Name="vcGender" Tapped="VcGender_Tapped" Height="40" >
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,0,10,0">
+
+                                <Label Text="  性     别  ：" HorizontalOptions="StartAndExpand"
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                    <Label x:Name="lblGender" Text="男"
+                                       HorizontalTextAlignment="End" VerticalTextAlignment="Center"></Label>
+
+                                    <Label Text="﹥" TextColor="#2196F3" 
+                                   FontSize="Large"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="End"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell x:Name="vcAge"  Height="40" >
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,0,10,0">
+
+                                <Label Text="  年     龄  ：" HorizontalOptions="StartAndExpand"
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Padding="0,0,15,0">
+                                    <Label x:Name="lblAge" Text="24" 
+                                       HorizontalTextAlignment="End" VerticalTextAlignment="Center"></Label>
+
+                                    <Label Text="岁" TextColor="#2196F3" Margin="8,0,0,0"
+                                   FontSize="Micro"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="End"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell x:Name="vcBirthday" Tapped="VcBirthday_Tapped" Height="40" >
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,0,10,0">
+
+                                <Label Text="  生     日  ：" HorizontalOptions="StartAndExpand"
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                    <Label x:Name="lblBirthday" Text="19940706"
+                                       HorizontalTextAlignment="End" VerticalTextAlignment="Center"></Label>
+
+                                    <Label Text="﹥" TextColor="#2196F3" 
+                                   FontSize="Large"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="End"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell x:Name="vcPhone" Tapped="VcPhone_Tapped" Height="40" >
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,0,10,0">
+
+                                <Label Text="  电     话  ：" HorizontalOptions="StartAndExpand"
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                    <Label x:Name="lblPhone" Text="18152797806"
+                                       HorizontalTextAlignment="End" VerticalTextAlignment="Center"></Label>
+
+                                    <Label Text="﹥" TextColor="#2196F3" 
+                                   FontSize="Large"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="End"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell x:Name="vcIntroduce" Tapped="VcIntroduce_Tapped"  Height="40" >
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,0,10,0">
+
+                                <Label Text="自我介绍：" HorizontalOptions="StartAndExpand"
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                    <Label x:Name="lblIntroduce" Text="自我介绍" 
+                                       HorizontalTextAlignment="End" VerticalTextAlignment="Center"></Label>
+
+                                    <Label Text="﹥" TextColor="#2196F3" 
+                                   FontSize="Large"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="End"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell x:Name="vcDescribe" Tapped="VcDescribe_Tapped"  Height="40" >
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,0,10,0">
+
+                                <Label Text="自我描述：" HorizontalOptions="StartAndExpand"
+                                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                    <Label x:Name="lblDescribe" Text="自我描述"
+                                       HorizontalTextAlignment="End" VerticalTextAlignment="Center"></Label>
+
+                                    <Label Text="﹥" TextColor="#2196F3" 
+                                   FontSize="Large"
+                                   VerticalTextAlignment="Center" 
+                                   HorizontalTextAlignment="End"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+
+                    </TableSection>
+
+                </TableRoot>
+            </TableView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

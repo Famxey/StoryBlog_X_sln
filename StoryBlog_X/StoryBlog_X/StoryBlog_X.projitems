@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{3F7106A5-270E-43A8-8763-4BD6D309C339}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>StoryBlog_X</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\PanContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ImageResourceExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\TrackSeriesApiException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\Cut_Helper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\IBaseUrl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\OptionHtml_Helper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\OptionImages_Helper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\OptionText_Helper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\SkiaSharpCls\BitmapExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\SkiaSharpCls\CroppingRectangle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\SkiaSharpCls\PhotoCropperCanvasView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\SkiaSharpCls\TouchActionEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\SkiaSharpCls\TouchActionEventHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\SkiaSharpCls\TouchActionType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\SkiaSharpCls\TouchEffect.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\SkiaSharpCls\TouchPoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\Version_Helper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\WebApiService_Helper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HelperCls\SkiaSharpCls\IPhotoLibrary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ArticleInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ConnectHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\InfiniteListView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\LoadMoreListView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\PictureInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\UserInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Browse.xaml.cs">
+      <DependentUpon>Browse.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\HomeFiles\ArticleRandom.xaml.cs">
+      <DependentUpon>ArticleRandom.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\HomeFiles\PictureRandom.xaml.cs">
+      <DependentUpon>PictureRandom.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\HomeFiles\VideoRandom.xaml.cs">
+      <DependentUpon>VideoRandom.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\IndexFile\I_Article.xaml.cs">
+      <DependentUpon>I_Article.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\IndexFile\I_Picture.xaml.cs">
+      <DependentUpon>I_Picture.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\LoginFile\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Message.xaml.cs">
+      <DependentUpon>Message.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\My.xaml.cs">
+      <DependentUpon>My.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MyFiles\Blogs.xaml.cs">
+      <DependentUpon>Blogs.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MyFiles\BlogsFiles\EditBlogs.xaml.cs">
+      <DependentUpon>EditBlogs.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MyFiles\BlogsFiles\ReadBlogs.xaml.cs">
+      <DependentUpon>ReadBlogs.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MyFiles\BlogsFiles\WriteBlogs.xaml.cs">
+      <DependentUpon>WriteBlogs.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MyFiles\Pictures.xaml.cs">
+      <DependentUpon>Pictures.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MyFiles\Setting.xaml.cs">
+      <DependentUpon>Setting.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MyFiles\SettingFiles\UpdateBGPicture.xaml.cs">
+      <DependentUpon>UpdateBGPicture.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MyFiles\SettingFiles\UpdatePassword.xaml.cs">
+      <DependentUpon>UpdatePassword.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MyFiles\SettingFiles\UploadHeadPicture.xaml.cs">
+      <DependentUpon>UploadHeadPicture.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MyFiles\SettingFiles\UserInfo.xaml.cs">
+      <DependentUpon>UserInfo.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MyFiles\SettingFiles\UserInfoEdit.xaml.cs">
+      <DependentUpon>UserInfoEdit.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Publish.xaml.cs">
+      <DependentUpon>Publish.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\BrowseFiles\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\MessageFiles\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\PublishFiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Message.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Browse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\IndexFile\I_Picture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)CSS\Bars.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\zan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\LoginFile\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\IndexFile\I_Article.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Publish.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\HomeFiles\ArticleRandom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\HomeFiles\PictureRandom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\HomeFiles\VideoRandom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\My.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyFiles\SettingFiles\UserInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyFiles\SettingFiles\UpdatePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyFiles\SettingFiles\UploadHeadPicture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyFiles\SettingFiles\UserInfoEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyFiles\Setting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyFiles\Blogs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyFiles\BlogsFiles\ReadBlogs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyFiles\BlogsFiles\WriteBlogs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyFiles\BlogsFiles\EditBlogs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyFiles\SettingFiles\UpdateBGPicture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyFiles\Pictures.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

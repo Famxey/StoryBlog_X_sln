@@ -1,0 +1,22 @@
+﻿.bars {
+    background-color: #2196F3;
+    color: white;
+    font-size: 25;
+    height: 40;
+}
+
+.tips_bars {
+    background-color: white;
+}
+
+.ThemeBlue {
+    background-color: #2196F3;
+    color: white;
+}
+
+.mybar {
+    color: white;
+    font-size: 25;
+    height: 40;
+    text-align:center;
+}

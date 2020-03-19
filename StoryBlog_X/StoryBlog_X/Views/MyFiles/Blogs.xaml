@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StoryBlog_X.Views.MyFiles.Blogs"
+              Title="日志" Appearing="LoadingEvent">
+    <ContentPage.Content>
+
+        <StackLayout >
+
+            <StackLayout BackgroundColor=" #2196F3" Orientation="Horizontal">
+
+                <Button x:Name="btnBack"
+                        Text="＜"
+                        TextColor="White"
+                        BackgroundColor="#2196F3"
+                        Clicked="BtnBack_Clicked" 
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="Start"/>
+
+                <Label x:Name="artBar"  Text="日志" 
+                      HorizontalTextAlignment="Center"
+                      VerticalTextAlignment="Center"
+                      StyleClass="bars"
+                      HorizontalOptions="CenterAndExpand"></Label>
+
+                <Button x:Name="btnShrink"
+                        Text="▲"
+                        TextColor="White"
+                        BackgroundColor="#2196F3"
+                        Clicked="BtnShrink_Clicked" 
+                        IsVisible="False"
+                        HeightRequest="40"
+                        HorizontalOptions="End"/>
+
+                <ImageButton x:Name="ImgBtnWriteBlog"  Source="WriteBlog.png" Aspect="Fill" Margin="0,8,15,8"               
+                        Clicked="ImgBtnWriteBlog_Clicked" 
+                        HeightRequest="25"
+                        WidthRequest="25"
+                        HorizontalOptions="End"/>
+            </StackLayout>
+
+            <StackLayout  x:Name="skltLoading" IsVisible="False" 
+                          Padding="0,0,0,0" Margin="0,-8,0,0">
+
+                <ProgressBar x:Name="actLoading" Margin="0,0,0,0"
+                             ProgressColor="Green" 
+                             HeightRequest="5"
+                             HorizontalOptions="Fill"
+                             Progress=".4"/>
+            </StackLayout>
+
+            <ListView x:Name="art_listView" RowHeight="100" SeparatorVisibility="Default"
+                      IsPullToRefreshEnabled="True" Refreshing="Art_listView_Refreshing"
+                      ItemTapped="Art_listView_ItemTapped" 
+                      ItemAppearing="Art_listView_ItemAppearing">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="OnEdit_Clicked" Text="编辑"  CommandParameter="{Binding artNo}"/>
+                                <MenuItem Clicked="OnDelete_Clicked" Text="删除"  CommandParameter="{Binding artNo}"/>
+                            </ViewCell.ContextActions>
+
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" 
+                                       Grid.Column="1"
+                                       FontAttributes="Bold"
+                                       MaxLines="1"
+                                       VerticalOptions="End">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="《" />
+                                            <Span Text="{Binding Title} " />
+                                            <Span Text="》" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       VerticalOptions="Start"
+                                       MaxLines="1"
+                                       TextColor="Gray">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding artCreateTimeA} " />
+                                            <Span Text="丨" />
+                                            <Span Text="{Binding artHot} " />
+                                            <Span Text="浏览" />
+                                            <Span Text="丨" />
+                                            <Span Text="{Binding artComCnt} " />
+                                            <Span Text="评论" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                            </Grid>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout x:Name="skltLoadMore" StyleClass="tips_bars" IsVisible="True" HorizontalOptions="Center">
+
+                <StackLayout Orientation="Horizontal">
+
+                    <Button x:Name="btnReturnBottom"
+                        Text="▼"
+                        HorizontalOptions="Center"
+                        BackgroundColor="White"
+                        TextColor="#2196F3"
+                        Clicked="BtnReturnBottom_Clicked" />
+
+                    <Label Text="丨" TextColor="#2196F3" 
+                           VerticalTextAlignment="Center"></Label>
+                    <Button x:Name="btnLoadMore" Text="点击加载更多..."
+                       HorizontalOptions="Center"
+                       Clicked="BtnLoadMore_Clicked"
+                       TextColor="Gray"
+                       BackgroundColor="White"/>
+                    <Label Text="丨" TextColor="#2196F3" 
+                           VerticalTextAlignment="Center"></Label>
+
+                    <Button x:Name="btnReturnTop"
+                        Text="▲"
+                        HorizontalOptions="Center"
+                        BackgroundColor="White"
+                        TextColor="#2196F3"
+                        Clicked="BtnReturnTop_Clicked" />
+                </StackLayout>
+            </StackLayout>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

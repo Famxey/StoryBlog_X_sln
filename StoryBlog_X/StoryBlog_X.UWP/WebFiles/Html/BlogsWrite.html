@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>写日志</title>
+    <meta name="keywords" content="form">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link rel="stylesheet" href="../AmazeUI-1.0.1/assets/css/amazeui.min.css" />
+    <script src="../Public.js"></script>
+    <style>
+        .toolbar {
+            border: 1px solid #ccc;
+            height: auto;
+        }
+
+        .text {
+            border: 1px solid #ccc;
+            height: 300px;
+        }
+
+        .pet_mian {
+            max-width: 640px;
+            margin: 0 auto;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pet_mian">
+        <div class="am-tab-panel ">
+            <form class="am-form">
+                <div class="am-g am-margin-top">
+                    <div class="col-sm-2 am-text-right" style="line-height:36px">
+                        标题
+                    </div>
+                    <div class="col-sm-8 col-sm-pull-1 ">
+                        <input id="Title" type="text" class="am-input-sm" placeholder="*必填，不可重复">
+                    </div>
+                </div>
+
+                <div class="am-g am-margin-top">
+                    <div class="col-sm-2 am-text-right" style="line-height:36px">
+                        类别
+                    </div>
+                    <div class="col-sm-6 col-sm-offset-1 ">
+                        <select id="artCls_Sel">
+                            <option value="0">默认日志</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 col-sm-pull-1" style="line-height:36px">
+                        <button id="artClsAdd_btn" type="button" class="am-btn am-round am-btn-primary am-btn-xs am-center">加</button>
+                    </div>
+                </div>
+
+                <div class="am-g am-margin-top">
+                    <div class="col-sm-2 am-text-right" style="line-height:36px">
+                        权限
+                    </div>
+                    <div class="col-sm-6 col-sm-pull-3 ">
+                        <select id="artAuthority_Sel">
+                            <option value="1">公开</option>
+                            <option value="0">保密</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="am-g am-margin-top">
+                    <div class="col-sm-2 am-text-right" style="line-height:36px">
+                        摘要
+                    </div>
+                    <div class="col-sm-8 col-sm-pull-1 ">
+                        <input id="artDigest" type="text" class="am-input-sm" placeholder="不填写则自动截取内容前150字符">
+                    </div>
+                </div>
+
+                <div class="am-g am-margin-top">
+
+                    <div id="toolbar" class="toolbar" style="overflow:scroll"></div>
+
+                    <div id="editor" class="text col-sm-12">
+                        <p>写点什么吧...</p>
+                    </div>
+                </div>
+
+                <div class="am-g am-cf am-margin-top am-margin-bottom">
+
+                    <button id="artSubmit" type="button" class="am-btn am-btn-primary am-btn-xs am-center">提交保存</button>
+
+                </div>
+            </form>
+        </div>
+        <!-- 弹窗添加名称内容 -->
+        <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt" style="z-index:10002">
+            <div class="am-modal-dialog">
+                <div class="am-modal-hd" id="PromptTitle">添加日志分类</div>
+                <div class="am-modal-bd">
+
+                    <input id="aNametxt" type="text" class="am-modal-prompt-input">
+                </div>
+                <div class="am-modal-footer">
+                    <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                    <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../AmazeUI-1.0.1/assets/js/zepto.min.js"></script>
+    <script src="../AmazeUI-1.0.1/assets/js/amazeui.min.js"></script>
+    <script src="../wangEditor.js"></script>
+
+    <script type="text/javascript">
+
+        var E = window.wangEditor
+        var editor = new E('#toolbar', '#editor')
+        editor.create()
+
+        var uAccount = GetQueryString("Account");
+        //var uAccount = "famxey11";
+        var baseUri = uri + version;
+
+        $(function () {
+            LoadingWangEditor();
+            artClsClickAdd();
+            LoadingCls();
+            SubmitForm();
+
+        });
+
+        function LoadingWangEditor() {
+            //解决工具栏的不显示下拉列表的问题
+            $(".w-e-menu").each(function () {
+                $(this).removeClass("w-e-menu").css("padding-left", "15px").css("height", "35px");
+            });
+
+            editor.txt.clear();
+        }
+
+        function LoadingCls() {
+            var GetJsonUri = baseUri + "/article_/cls?uAccount=" + uAccount;
+            $.ajax({
+                type: "GET",
+                url: GetJsonUri,
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<option value="' + data[i].ID + '">' + data[i].artClsTitle + '</option>';
+                    }
+                    $("#artCls_Sel").html(html);
+
+                }
+            });
+
+        }
+
+        function SubmitForm() {
+            $("#artSubmit").click(function () {
+                $.AMUI.progress.start();
+                var Title = $("#Title").val();
+                var artClsID = $("#artCls_Sel").val();
+                var artAuthority = $("#artAuthority_Sel").val();
+                var artDigest = $("#artDigest").val();
+                var artContent = editor.txt.html();
+
+                console.log(Title);
+                console.log(artClsID);
+                console.log(artAuthority);
+                console.log(artDigest);
+                console.log(artContent);
+
+
+                if (uAccount == '') {
+                    $.AMUI.progress.done();
+                    return;
+                }
+
+                if (Title == '') {
+                    $.AMUI.progress.done();
+                    $("#Title").attr("placeholder", "*不能为空哦！");
+                    return;
+                }
+
+                var artC = editor.txt.text();
+
+                if (artC == '') {
+                    $.AMUI.progress.done();
+                    $("#artDigest").attr("placeholder", "*文章不能为空哦！");
+                    return;
+                }
+
+                if (artDigest == '') {
+
+                    if (artC.length > 140) {
+                        artDigest = artC.substr(0, 140);
+                    } else {
+                        artDigest = artC;
+                    }
+                }
+                console.log(artDigest);
+
+                var GetJsonUri = baseUri + "/article_/add"
+
+                var datas = {
+                    "uAccount": uAccount,
+                    "Title": Title,
+                    "artClsID": artClsID,
+                    "artAuthority": artAuthority,
+                    "artDigest": artDigest,
+                    "artContent": artContent,
+                };
+
+
+                $.ajax({
+                    type: "POST",
+                    url: GetJsonUri,
+                    data: datas,
+                    dataType: "json",
+                    success: function (data) {
+
+                        console.log(data);
+
+                        if (data[0].Flag) {
+
+                            $.AMUI.progress.done();
+                            alert("发布成功！");
+
+                            window.location.reload();
+
+                        }
+
+                    }
+                });
+
+
+
+            });
+        }
+
+        function artClsClickAdd() {
+
+            $('#artClsAdd_btn').click(function () {
+
+                $('#my-prompt').modal({
+                    relatedElement: this,
+                    onConfirm: function (data) {
+
+                        console.log(data);
+
+                        if (data == "") {
+
+                            $('#PromptTitle').css("color", "red").html("内容不能为空哦！");
+
+                            return;
+                        }
+                        if (data.length > 20) {
+
+                            $('#PromptTitle').css("color", "red").html("内容超过20个字数哦！");
+
+                            return;
+                        }
+
+                        var GetJsonUri = baseUri + "/article_/cls_add?uAccount=" + uAccount + "&artClsTitle=" + data;
+                        $.ajax({
+                            type: "POST",
+                            url: GetJsonUri,
+                            dataType: "json",
+                            success: function (data) {
+
+                                console.log(data);
+
+                                if (data[0].Flag) {
+                                    LoadingCls();
+                                }
+
+                            }
+                        });
+
+
+                    }
+                });
+            });
+
+        }
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2])
+            }
+            return null
+        }
+
+    </script>
+
+</body>
+</html>
