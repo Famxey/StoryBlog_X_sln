@@ -19,11 +19,19 @@ namespace StoryBlog_X.Views
             InitializeComponent();
         }
 
-        private void ContentPage_Appearing(object sender, EventArgs e)
+        async private void ContentPage_Appearing(object sender, EventArgs e)
         {
-            var htmlSource = new HtmlWebViewSource();
 
             string Account = OptionText_Helper.ReadAllText("Account");
+
+            string NickName = OptionText_Helper.ReadAllText("NickName");
+
+            if (Account == "" || NickName == "")
+            {
+                await Navigation.PushAsync(new LoginFile.Login("MyPage"));
+            }
+
+            var htmlSource = new HtmlWebViewSource();
 
             //转义符号很重要，不然参数太长不识别
             string Html = "<html><head><script src='Initial.js'></script></head><body onload='loadingMy(" + "\"" + Account + "\"" + ")'></body></html>";

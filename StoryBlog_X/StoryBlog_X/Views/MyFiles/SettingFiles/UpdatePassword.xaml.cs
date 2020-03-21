@@ -11,9 +11,9 @@ using Xamarin.Forms.Xaml;
 
 namespace StoryBlog_X.Views.MyFiles.SettingFiles
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class UpdatePassword : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class UpdatePassword : ContentPage
+    {
 
         public UpdatePassword()
         {
@@ -24,11 +24,18 @@ namespace StoryBlog_X.Views.MyFiles.SettingFiles
 
         private async void BtnSave_Clicked(object sender, EventArgs e)
         {
-            Models.UserInfo ui = new Models.UserInfo();
-            ui.Account = OptionText_Helper.ReadAllText("Account");
-            ui.PassWord = this.etyNewPwd.Text.Trim();
+
+            if (!(this.lblTipsOldPwd.Text== "√"&& this.lblTipsNewPwd.Text == "√" && this.lblTipsReNewPwd.Text == "√"))
+            {
+                return;
+            }
 
             List<Models.UserInfo> list = new List<Models.UserInfo>();
+
+            Models.UserInfo ui = new Models.UserInfo();
+            ui.Account = OptionText_Helper.ReadAllText("Account");
+            ui.PassWord = MD5_Helper.MD5Encrypt16(this.etyNewPwd.Text);
+
             string url = $"/{Version_Helper.versionNumber}/user_/update?Option=PassWord&Account={ui.Account}";
 
             list.Add(ui);
@@ -60,20 +67,20 @@ namespace StoryBlog_X.Views.MyFiles.SettingFiles
             string PassWord = OptionText_Helper.ReadAllText("PassWord");
 
             if (OldPwd == null)
-            {
-                this.lblTips.TextColor = System.Drawing.Color.Red;
-                this.lblTips.Text = "此项不能为空！";
+            {              
+                this.lblTipsOldPwd.TextColor = System.Drawing.Color.Red;
+                this.lblTipsOldPwd.Text = "此项不能为空！";
                 return;
             }
 
-            if (OldPwd != PassWord)
+            if (MD5_Helper.MD5Encrypt16(OldPwd )!= PassWord)
             {
-                this.lblTips.Text = "输入与原来的密码不一致！";
+                this.lblTipsOldPwd.Text = "输入与原来的密码不一致！";
             }
             else
             {
-                this.lblTips.TextColor = System.Drawing.Color.YellowGreen;
-                this.lblTips.Text = "√";
+                this.lblTipsOldPwd.TextColor = System.Drawing.Color.YellowGreen;
+                this.lblTipsOldPwd.Text = "√";
             }
         }
 
@@ -85,28 +92,28 @@ namespace StoryBlog_X.Views.MyFiles.SettingFiles
 
             if (NewPwd == null)
             {
-                this.lblTips.TextColor = System.Drawing.Color.Red;
-                this.lblTips.Text = "此项不能为空！";
+                this.lblTipsNewPwd.TextColor = System.Drawing.Color.Red;
+                this.lblTipsNewPwd.Text = "此项不能为空！";
                 return;
             }
 
             if (NewPwd == OldPwd)
             {
-                this.lblTips.TextColor = System.Drawing.Color.Red;
-                this.lblTips.Text = "与原来的密码一致了！";
+                this.lblTipsNewPwd.TextColor = System.Drawing.Color.Red;
+                this.lblTipsNewPwd.Text = "与原来的密码一致了！";
                 return;
             }
 
 
             if (NewPwd.Length < 6)
             {
-                this.lblTips.TextColor = System.Drawing.Color.Red;
-                this.lblTips.Text = "输入的新密码长度不够（6—16）！";
+                this.lblTipsNewPwd.TextColor = System.Drawing.Color.Red;
+                this.lblTipsNewPwd.Text = "输入的新密码长度不够（6—16）！";
             }
             else
             {
-                this.lblTips.TextColor = System.Drawing.Color.YellowGreen;
-                this.lblTips.Text = "√√";
+                this.lblTipsNewPwd.TextColor = System.Drawing.Color.YellowGreen;
+                this.lblTipsNewPwd.Text = "√";
             }
         }
 
@@ -117,20 +124,20 @@ namespace StoryBlog_X.Views.MyFiles.SettingFiles
 
             if (ReNewPwd == null)
             {
-                this.lblTips.TextColor = System.Drawing.Color.Red;
-                this.lblTips.Text = "此项不能为空！";
+                this.lblTipsReNewPwd.TextColor = System.Drawing.Color.Red;
+                this.lblTipsReNewPwd.Text = "此项不能为空！";
                 return;
             }
 
             if (ReNewPwd != NewPwd)
             {
-                this.lblTips.TextColor = System.Drawing.Color.Red;
-                this.lblTips.Text = "输入与新的密码不一致！";
+                this.lblTipsReNewPwd.TextColor = System.Drawing.Color.Red;
+                this.lblTipsReNewPwd.Text = "输入与新的密码不一致！";
             }
             else
             {
-                this.lblTips.TextColor = System.Drawing.Color.YellowGreen;
-                this.lblTips.Text = "√√√";
+                this.lblTipsReNewPwd.TextColor = System.Drawing.Color.YellowGreen;
+                this.lblTipsReNewPwd.Text = "√";
                 this.btnSave.BackgroundColor = System.Drawing.Color.YellowGreen;
                 this.btnSave.IsEnabled = true;
             }

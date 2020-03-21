@@ -82,7 +82,7 @@ namespace StoryBlog_X.Views.LoginFile
 
                 switch (judge)
                 {
-                    case "SettingPage":
+                    case "MyPage":
                         await Navigation.PopAsync();
                         //await Navigation.PushAsync(new MainPage(judge));
                         break;

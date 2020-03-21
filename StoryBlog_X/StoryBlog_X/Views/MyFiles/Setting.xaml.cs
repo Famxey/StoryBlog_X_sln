@@ -19,7 +19,7 @@ namespace StoryBlog_X.Views.MyFiles
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        private async void ContentPage_Appearing(object sender, EventArgs e)
+        private void ContentPage_Appearing(object sender, EventArgs e)
         {
             string Account = OptionText_Helper.ReadAllText("Account");
 
@@ -27,23 +27,14 @@ namespace StoryBlog_X.Views.MyFiles
 
             string url = WebApiService_Helper.HttpBaseAddress + OptionText_Helper.ReadAllText("Picture");
 
-            if (Account == "" || NickName == "")
-            {
-                await Navigation.PushAsync(new LoginFile.Login("SettingPage"));
-            }
-
-
             this.imgUser.Source = url;
             this.lblNickName.Text = "昵称：" + Account;
             this.lblAccount.Text = "账号：" + NickName;
-
         }
 
         private async void VcUserInfo_Tapped(object sender, EventArgs e)
         {
-
             await Navigation.PushAsync(new SettingFiles.UserInfo());
-
         }
 
         private async void VcSafety_Tapped(object sender, EventArgs e)
