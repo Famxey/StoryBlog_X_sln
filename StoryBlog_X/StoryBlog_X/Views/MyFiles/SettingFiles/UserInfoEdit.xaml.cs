@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 
 namespace StoryBlog_X.Views.MyFiles.SettingFiles
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class UserInfoEdit : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class UserInfoEdit : ContentPage
+    {
 
         private static string judge;
 
@@ -125,7 +125,8 @@ namespace StoryBlog_X.Views.MyFiles.SettingFiles
                     break;
                 case "Birthday":
                     ui.Birthday = this.DPBirthday.Date;
-                    this.edtString.Text = this.DPBirthday.Date.ToString("yyyy/MM/dd"); 
+                    ui.Age = DateTime.Now.Year - this.DPBirthday.Date.Year;
+                    this.edtString.Text = this.DPBirthday.Date.ToString("yyyy/MM/dd");
                     break;
             }
 

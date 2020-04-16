@@ -221,8 +221,8 @@
         //uri = "http://localhost:888";
         var baseUri = uri + version;
 
-        //var uAccount = GetQueryString("Account");
-        var uAccount = "famxey11";
+        var uAccount = GetQueryString("Account");
+        //var uAccount = "cyan11";
 
         var list;
 
@@ -398,10 +398,10 @@
                 console.log(CoverFile);
                 console.log(picClsDescribe);
 
-                if (picClsTitle == "" || picClsTitle == "picClsDescribe") {
+                if (picClsTitle == "" || picClsTitle == picClsDescribe) {
                     return;
                 }
-                if (CoverFile = "undefined") {
+                if (CoverFile == "undefined") {
                     return;
                 }
 
@@ -410,6 +410,9 @@
 
                 var GetJsonUri = baseUri + "/picture_/cls-add?uAccount=" + uAccount + "&picClsTitle=" + picClsTitle
                     + "&picClsAuthority=" + picClsAuthority + "&picClsDescribe=" + picClsDescribe;
+
+                console.log(GetJsonUri);
+
                 $.ajax({
                     type: "POST",
                     url: GetJsonUri,

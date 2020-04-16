@@ -220,8 +220,8 @@
 
         var baseUri = uri + version;
 
-        //var uAccount = GetQueryString("Account");
-        var uAccount = "famxey11";
+        var uAccount = GetQueryString("Account");
+        //var uAccount = "famxey11";
 
         var list;
 
@@ -397,10 +397,10 @@
                 console.log(CoverFile);
                 console.log(picClsDescribe);
 
-                if (picClsTitle == "" || picClsTitle == "picClsDescribe") {
+                if (picClsTitle == "" || picClsTitle == picClsDescribe) {
                     return;
                 }
-                if (CoverFile = "undefined") {
+                if (CoverFile == "undefined") {
                     return;
                 }
 
